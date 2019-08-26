@@ -35,7 +35,7 @@ const result = search.sync().toJSON();
 
 ```
 
-### Mit Argumenten *[Mehr unter .searchByArgs](#.searchByArgs(String:args))*
+### Mit Argumenten *[Mehr unter .searchByArgs](#SearchByArgs)*
 ```javascript
 
 const args = '"*2019*" -path "C:\\users\\tom" -size ">=1m" -excludefolder .git,node_modules -created ">= 10 Days" -ext png -ext jpg -kind pictures -ignore "*_berlin*"'
@@ -86,7 +86,7 @@ const search = new Search(defaultOptions);
 
 ```
 
-### **[.searchByArgs(String)](#.searchByArgs(String:args))**
+### **[.searchByArgs(String)](#SearchByArgs)**
 ### **.sync()**
 ```javascript
 search.sync()
@@ -193,7 +193,7 @@ search.modified(">= 10 days") // Geändert in den letzten 10 Tagen
 + Minuten: m, minutes, minute, min, mins  
 
 
-
+## SearchByArgs
 ### **.searchByArgs(String:args)**
 
 #### Standalone  
@@ -212,7 +212,6 @@ search.modified(">= 10 days") // Geändert in den letzten 10 Tagen
 | -noRecurse -nr     |                   |                               | Nur im angegebenen Pfad suchen
 | -isEmpty           |                   |                               | Leere Dateien
 | -excludefolder     | String (Multiple) | Default: node_modules,.git    | Ordner ignorieren
-|
 | **Zeit**           | String            | <,<=,=,=>,> Number(h,d,m)     | Hours (h), Days (d), Minutes (m) 
 | -accessed          |||     
 | -imported          ||| 
