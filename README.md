@@ -9,9 +9,13 @@ Mithilfe des SYSTEMINDEX von Windows und der Powershell in Sekundenschnelle Date
 
 ## Getting start
 
+```
+npm i --save filesearch-windows
+```
+
 ```javascript
 
-const Search = require("./search");
+const Search = require("filesearch-windows");
 const search = new Search();
 
 ```
