@@ -10,7 +10,7 @@
   "author": "tsmr",
   "homepage": "https://github.com/otsmr",
   "os": [
-    "windows"
+    "win32"
   ],
   "keywords": [
     "search",
