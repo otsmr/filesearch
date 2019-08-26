@@ -335,7 +335,7 @@ class Search {
 
         }
 
-        this._result = this.sync();
+        this.sync();
         return this;
 
     }
