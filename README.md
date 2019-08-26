@@ -1,6 +1,12 @@
 
 # Windows: schnell Dateien und Ordner finden
 [![LICENSE][license-image]][license-url]
+[![LICENSE][npm-version-image]][npm-version-url]
+
+
+
+[npm-version-url]: https://www.npmjs.com/package/filesearch-windows
+[npm-version-image]: https://img.shields.io/npm/v/filesearch-windows.svg?style=flat 
 
 [license-url]: https://github.com/otsmr/filesearch/blob/master/LICENSE
 [license-image]: https://img.shields.io/github/license/otsmr/filesearch 
