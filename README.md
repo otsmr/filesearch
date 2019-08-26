@@ -1,5 +1,11 @@
 
 # Windows: schnell Dateien und Ordner finden
+[![LICENSE][license-image]][license-url]
+
+[license-url]: https://github.com/otsmr/filesearch/blob/master/LICENSE
+[license-image]: https://img.shields.io/github/license/otsmr/filesearch 
+
+
 Mithilfe des SYSTEMINDEX von Windows und der Powershell in Sekundenschnelle Dateien und Ordner finden.
 
 ## Getestet unter
