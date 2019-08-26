@@ -1,18 +1,32 @@
 {
-  "name": "filesearch",
+  "name": "filesearch-windows",
   "version": "1.0.0",
   "description": "Mithilfe des SYSTEMINDEX von Windows und der Powershell in Sekundenschnelle Dateien und Ordner finden.",
   "main": "filesearch.js",
   "directories": {
     "example": "example"
   },
-  "scripts": { },
+  "scripts": {},
   "author": "tsmr",
   "homepage": "https://github.com/otsmr",
-  "os": ["windows"],
-  "keywords": ["search", "windows", "find"],
+  "os": [
+    "windows"
+  ],
+  "keywords": [
+    "search",
+    "windows",
+    "find"
+  ],
   "license": "MIT",
   "dependencies": {
     "moment": "^2.24.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otsmr/filesearch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/otsmr/filesearch/issues"
   }
 }
