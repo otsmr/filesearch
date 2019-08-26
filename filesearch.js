@@ -1,8 +1,8 @@
-const path = require("path");
+const getindexeditem = require("./scripts/getindexeditem");
+
 const moment = require("moment");
 const powershell = require("./src/powershell");
 const parseargv = require('./src/parseargv');
-
 const property = [
     "Name",
     "SIZE",
@@ -55,8 +55,7 @@ class Search {
             run += " -Filter " + this._filter.join(", ");
 
         }
-        const modulPath = path.join(__dirname, "scripts", "getindexitem.ps1").replace(/\\/, "/");
-        return `.'${modulPath}'; Get-IndexedItem ` + run;
+        return `${getindexeditem}; Get-IndexedItem ` + run;
 
     }
 

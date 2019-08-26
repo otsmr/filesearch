@@ -4,7 +4,7 @@ const execSync = require("child_process").execSync;
 
 
 const search = new Search();
-const html = search
+search
     .match("*2019*") // "2019" im Namen der Datei
     .path(__dirname + "/img")
     .excludefolder([".git", "node_modules"])
@@ -18,9 +18,5 @@ const html = search
         fs.writeFileSync("result.html", html);
         execSync("start " + __dirname + "/result.html");
     })
-
-
-
-
 console.log("  ---------------  ");
 console.log(search.befehl);

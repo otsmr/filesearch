@@ -1,9 +1,13 @@
 "use strict";
-const {spawnSync, spawn} = require('child_process');
+const {spawnSync, spawn, execSync} = require('child_process');
 const fs = require("fs");
 const path = require("path");
 
 module.exports = new class {
+
+    constructor () {
+        this.tmp = execSync("echo %tmp%").toString().replace("\r\n", "");
+    }
 
     admin (befehl) {
         return this.run(`Start-Process powershell -WindowStyle Minimized -Verb runAs -ArgumentList \\\"${befehl}\\\"`);
@@ -41,7 +45,7 @@ module.exports = new class {
 
     _getJSONBefehl (befehl, params, fileNumber) {
 
-        const file = path.join(__dirname, "/tmp."+fileNumber+".json");
+        const file = path.join(this.tmp, "/tmp."+fileNumber+".json");
         if (params.length > 0) {
             befehl += ` | Select-Object -Property ${params.join(", ")}`
             befehl += ` | ConvertTo-Json`
@@ -54,7 +58,7 @@ module.exports = new class {
     _getJSONResult (fileNumber) {
         
         try {
-            const file = path.join(__dirname, "/tmp."+fileNumber+".json");
+            const file = path.join(this.tmp, "/tmp."+fileNumber+".json");
 
             let data = fs.readFileSync(file).toString();
             fs.unlinkSync(file);
