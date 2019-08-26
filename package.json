@@ -1,6 +1,6 @@
 {
   "name": "filesearch-windows",
-  "version": "1.0.1",
+  "version": "1.0.11",
   "description": "Mithilfe des SYSTEMINDEX von Windows und der Powershell in Sekundenschnelle Dateien und Ordner finden.",
   "main": "filesearch.js",
   "directories": {
