@@ -64,6 +64,10 @@ class Search {
         return powershell.getJSON(query, property);
     }
 
+    _getFromPowershellAsync(query, call) {
+        return powershell.getJSONAsync(query, property, call);
+    }
+
     _formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return '0 Bytes';
 
@@ -149,11 +153,9 @@ class Search {
 
     }
 
-    _search() {
+    _parseResults (json) {
 
-        let json = this._getFromPowershell(this.befehl);
-
-        if (!json) return false;
+        if (!json) return [];
         if (!json.length && json.length !== 0) json = [json];
         let res = [];
 
@@ -176,9 +178,23 @@ class Search {
             res.push(item);
         }
         return res;
+
     }
 
+    _search(async = false, call) {
 
+        if (async) {
+
+            this._getFromPowershellAsync(this.befehl, (json) => {
+                call(this._parseResults(json));
+            });
+
+        } else {
+            let json = this._getFromPowershell(this.befehl);
+            return this._parseResults(json);
+        }
+
+    }
 
     match(match, type = "System.FileName", like = true) {
         if (match.match(/[0-9]/g)) {
@@ -284,6 +300,17 @@ class Search {
         return kinds;
     }
 
+    async(call) {
+
+        this._search(true, (match) => {
+            if (!match.length && match.length !== 0) match = [match];
+            this._result = match;
+            call(this, match);
+        });
+
+        return this;
+    }
+
     sync() {
         let match = this._search();
         if (!match.length && match.length !== 0) match = [match];
@@ -335,7 +362,6 @@ class Search {
 
         }
 
-        this.sync();
         return this;
 
     }

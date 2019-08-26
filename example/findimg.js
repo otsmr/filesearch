@@ -13,13 +13,14 @@ const html = search
     .ext(["png", "jpg"]) // Nur .png und .jpp Dateien
     .kind("picture") // new Search().getKinds()
     .ignore("*_erlin*") // Dateien die zB. Berlin im Namen haben werden aussotiert
-    .sync()
-    .toHtmlTable()
+    .async((ins, data) =>  {
+        const html = ins.toHtmlTable();
+        fs.writeFileSync("result.html", html);
+        execSync("start " + __dirname + "/result.html");
+    })
 
 
 
-fs.writeFileSync("result.html", html);
-execSync("start " + __dirname + "/result.html");
-    
+
 console.log("  ---------------  ");
 console.log(search.befehl);

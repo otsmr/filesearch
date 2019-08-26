@@ -33,6 +33,13 @@ search
 // Suche starten
 const result = search.sync().toJSON();
 
+// ODER
+
+search.async((instanz, data) =>  {
+    const json = instanz.toJSON();
+    console.log(json);
+})
+
 ```
 
 ### Mit Argumenten *[Mehr unter .searchByArgs](#SearchByArgs)*
@@ -41,7 +48,14 @@ const result = search.sync().toJSON();
 const args = '"*2019*" -path "C:\\users\\tom" -size ">=1m" -excludefolder .git,node_modules -created ">= 10 Days" -ext png -ext jpg -kind pictures -ignore "*_berlin*"'
 
 // Suche starten
-const result = search.searchByArgs(args).toJSON();
+const result = search.searchByArgs(args).sync().toJSON();
+
+// ODER
+
+const result = search.searchByArgs(args).async((instanz, data) =>  {
+    const json = instanz.toJSON();
+    console.log(json);
+})
 
 ```
 
@@ -92,6 +106,12 @@ const search = new Search(defaultOptions);
 search.sync()
 ```
 Suche starten
+
+### **.async()**
+```javascript
+search.async(Function (instanz))
+```
+Suche async starten
 
 ### **.toHtmlTable()**
 ```javascript

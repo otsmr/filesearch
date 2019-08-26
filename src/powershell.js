@@ -1,5 +1,5 @@
 "use strict";
-const spawnSync = require('child_process').spawnSync;
+const {spawnSync, spawn} = require('child_process');
 const fs = require("fs");
 const path = require("path");
 
@@ -18,7 +18,28 @@ module.exports = new class {
         }
     }
 
-    getJSON (befehl, params = []) {
+    runAsync (befehl, call) {
+        try {
+            const search = spawn("powershell.exe", [befehl], { encoding : 'utf8' });
+
+            search.on('close', code => {
+                if (code === 0) {
+                    call();
+                } else {
+                   call(false);
+                }
+            });
+
+            search.stderr.on('data', (data) => {
+                call(false);
+            });
+        } catch (error) {
+            console.log(error);
+            call(false);
+        }
+    }
+
+    _getJSONBefehl (befehl, params) {
 
         const file = path.join(__dirname, "/tmp.json");
         if (params.length > 0) {
@@ -26,10 +47,15 @@ module.exports = new class {
             befehl += ` | ConvertTo-Json`
             befehl += ` | Out-File '${file}' -Encoding UTF8` // stupid endcoding
         }
-
+        
+        return befehl;
+    }
+    
+    _getJSONResult () {
+        
         try {
+            const file = path.join(__dirname, "/tmp.json");
 
-            this.run(befehl);
             let data = fs.readFileSync(file).toString();
             fs.unlinkSync(file);
             data = data.substr(1); // Bug Fix: '﻿' Encoding
@@ -48,6 +74,22 @@ module.exports = new class {
             console.log(error);
             return [];
         }
+
+    }
+
+    getJSONAsync (befehl, params = [], call) {
+        befehl = this._getJSONBefehl(befehl, params);
+        this.runAsync(befehl, (res) => {
+            console.log(res);
+            call(this._getJSONResult());
+        })
+    }
+
+    getJSON (befehl, params = []) {
+        befehl = this._getJSONBefehl(befehl, params);
+        this.run(befehl);
+    
+        return this._getJSONResult();
 
     }
 
