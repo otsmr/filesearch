@@ -39,9 +39,9 @@ module.exports = new class {
         }
     }
 
-    _getJSONBefehl (befehl, params) {
+    _getJSONBefehl (befehl, params, fileNumber) {
 
-        const file = path.join(__dirname, "/tmp.json");
+        const file = path.join(__dirname, "/tmp."+fileNumber+".json");
         if (params.length > 0) {
             befehl += ` | Select-Object -Property ${params.join(", ")}`
             befehl += ` | ConvertTo-Json`
@@ -51,10 +51,10 @@ module.exports = new class {
         return befehl;
     }
     
-    _getJSONResult () {
+    _getJSONResult (fileNumber) {
         
         try {
-            const file = path.join(__dirname, "/tmp.json");
+            const file = path.join(__dirname, "/tmp."+fileNumber+".json");
 
             let data = fs.readFileSync(file).toString();
             fs.unlinkSync(file);
@@ -78,18 +78,19 @@ module.exports = new class {
     }
 
     getJSONAsync (befehl, params = [], call) {
-        befehl = this._getJSONBefehl(befehl, params);
+        const fileNumber = parseInt(String(Math.random()).replace(".", ""));
+        befehl = this._getJSONBefehl(befehl, params, fileNumber);
         this.runAsync(befehl, (res) => {
-            console.log(res);
-            call(this._getJSONResult());
+            call(this._getJSONResult(fileNumber));
         })
     }
-
+    
     getJSON (befehl, params = []) {
-        befehl = this._getJSONBefehl(befehl, params);
+        const fileNumber = parseInt(String(Math.random()).replace(".", ""));
+        befehl = this._getJSONBefehl(befehl, params, fileNumber);
         this.run(befehl);
     
-        return this._getJSONResult();
+        return this._getJSONResult(fileNumber);
 
     }
 
