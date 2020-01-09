@@ -69,7 +69,7 @@ module.exports = new class {
             if (match) for (const item of match) {
                 let part = item.substr(1).slice(0, -2).trim();
                 if (part[0] === '"') part = part.substr(1);
-                part = part.replace(/\"/g, '"').replace(/"/g, '\\"');
+                part = part.replace(/\\\"/g, '\"').replace(/\"/g, '"').replace(/"/g, '\\"');
                 data = data.replace(item, `:  "${part}",`)
             }
             
