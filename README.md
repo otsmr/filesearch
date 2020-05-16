@@ -12,14 +12,14 @@
 [license-image]: https://img.shields.io/github/license/otsmr/filesearch 
 
 
-Mithilfe des SYSTEMINDEX von Windows und der Powershell in Sekundenschnelle Dateien und Ordner finden.
+Mithilfe des SYSTEMINDEX von Windows und der Powershell Dateien und Ornder.
 
 ## Getestet unter
 + Windows 10
 + Windows 7
 + Powershell 5
 
-## Getting start
+## Verwenden
 
 ```
 npm i --save filesearch-windows
